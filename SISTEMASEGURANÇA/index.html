@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Base de dados (10 usuários)
+const usuarios = [
+  { login: "admin", senha: "1234" },
+  { login: "gaby", senha: "senha1" },
+  { login: "ana", senha: "123" },
+  { login: "willian", senha: "abc" },
+  { login: "isabella", senha: "456" },
+  { login: "gabriel", senha: "789" },
+  { login: "renan", senha: "000" },
+  { login: "joao victor", senha: "111" },
+  { login: "raul", senha: "222" },
+  { login: "rafael", senha: "333" }
+];
+
+let tentativas = 3;
+let autenticado = false;
+let cancelado = false;
+
+do {
+  let login = prompt("Digite seu login:");
+  
+  if (login === null) {
+    cancelado = true;
+    break;
+  }
+
+  let senha = prompt("Digite sua senha:");
+
+  if (senha === null) {
+    cancelado = true;
+    break;
+  }
+
+  // Verifica se existe um usuário válido
+  autenticado = usuarios.some(user => 
+    user.login === login && user.senha === senha
+  );
+
+  if (autenticado) {
+    alert("Acesso Liberado ✅");
+  } else {
+    tentativas--;
+
+    if (tentativas > 0) {
+      alert("Login incorreto ❌\nTentativas restantes: " + tentativas);
+    }
+  }
+
+} while (!autenticado && tentativas > 0 && !cancelado);
+
+// Se acabou as tentativas
+if (!autenticado && tentativas === 0) {
+  alert("SISTEMA BLOQUEADO - Procure o Suporte 🚫");
+}
+    </script>
+</body>
+</html>
